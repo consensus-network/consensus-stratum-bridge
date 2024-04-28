@@ -1,0 +1,19 @@
+services:
+  css_bridge:
+    build:
+      context: .
+      no_cache: true
+    container_name: css_bridge
+    restart: unless-stopped
+    user: "0"
+    command:
+      - '-log=true'
+      - '-stats=false'
+      - '-stratum=:5555'
+      - '-prom=:2114'
+      - '-consensus=host.docker.internal:10105'
+    ports:
+      - 5555:5555
+      - 2114:2114
+    extra_hosts:
+      - host.docker.internal:host-gateway
